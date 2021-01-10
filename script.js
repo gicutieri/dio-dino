@@ -28,11 +28,11 @@
  			//go down
  			let downInterval = setInterval(() => {
  				if (position <= 0) {
- 					clearInterval(upInterval);
+ 					clearInterval(downInterval);
  					isJumping = false;
  				} else {
  					position -= 15;
-	 		dino.style.bottom = position + 'px';
+	 				dino.style.bottom = position + 'px';
  				}
  			}, 20);
 
