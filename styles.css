@@ -32,7 +32,7 @@
  	margin-bottom: 20px;
  }
 
- .game-over{
+ .game-over, .score{
  	text-align: center;
  	color: #66666f;
  	margin-top: 50px;

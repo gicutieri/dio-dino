@@ -4,11 +4,13 @@
 
  const dino = document.querySelector(".dino");
  const background = document.querySelector(".background");
+ const scoreTag = document.querySelector(".score");
 
  let isJumping = false;
  let isCrouching = false;
  let isGameOver = false;
  let position = 0;
+ let score = 0;
 
  function handleKeyUp(event) {
  	if (event.keyCode === 32 || event.keyCode === 38) {
@@ -99,7 +101,10 @@
  		if (cactusPosition < -60) {
  			clearInterval(leftInterval);
  			background.removeChild(cactus);
- 		} else if (cactusPosition > 0 && cactusPosition < 60 && position < 60) { //if it's on the same position as the dinossaur
+ 			score += 1;
+ 			scoreTag.innerHTML = "SCORE: " + score;
+ 			//console.log(score);
+ 		} else if (cactusPosition > 0 && cactusPosition < 60 && position < 60) { //if it's on the same position as the dinosaur
  			clearInterval(leftInterval);
  			isGameOver = true;
  			document.body.innerHTML = "<h1 class=\"game-over\">GAME OVER</h1>";
@@ -131,7 +136,10 @@
  		if (pterodactylPosition < -60) {
  			clearInterval(leftInterval2);
  			background.removeChild(pterodactyl);
- 		} else if (pterodactylPosition > 0 && pterodactylPosition < 60 && !isCrouching) { //if the dinossaur is standing
+ 			score += 1;
+ 			scoreTag.innerHTML = "SCORE: " + score;
+ 			//console.log(score);
+ 		} else if (pterodactylPosition > 0 && pterodactylPosition < 60 && !isCrouching) { //if the dinosaur is standing
  			clearInterval(leftInterval2);
  			isGameOver = true;
  			document.body.innerHTML = "<h1 class=\"game-over\">GAME OVER</h1>";
