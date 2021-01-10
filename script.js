@@ -6,13 +6,18 @@
  const background = document.querySelector(".background");
 
  let isJumping = false;
+ let isCrouching = false;
  let isGameOver = false;
  let position = 0;
 
  function handleKeyUp(event) {
  	if (event.keyCode === 32 || event.keyCode === 38) {
- 		if (!isJumping) {
+ 		if (!isCrouching && !isJumping) {
  			jump();
+ 		}
+ 	} else if (event.keyCode === 40) {
+ 		if (!isCrouching && !isJumping) {
+ 			crouch();
  		}
  	}
  }
@@ -43,6 +48,35 @@
  		}
 
  	}, 20);
+ }
+
+ function crouch() {
+ 	isCrouching = true;
+
+ 	dino.style.backgroundImage = "url(dino2.png)";
+
+ 	let crouchInterval = setInterval(() => {
+
+ 		if (position <= 150) {
+ 			//stop
+ 			clearInterval(crouchInterval);
+ 			//stand up
+ 			let standInterval = setInterval(() => {
+ 				if (position >= 0) {
+ 					clearInterval(standInterval);
+ 					isCrouching = false;
+ 					dino.style.backgroundImage = 'url(dino.png)';
+ 				} else {
+ 					position += 15;
+ 				}
+ 			}, 20);
+
+ 		} else {
+ 			//crouch
+	 		position -= 15;
+ 		}
+
+ 	}, 400);
  }
 
  function createCactus() {
