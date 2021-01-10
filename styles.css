@@ -12,6 +12,8 @@
  	background-image: url(img/dino.png);
  	position: absolute;
  	bottom: 0;
+ 	background-repeat: no-repeat;
+ 	background-position: bottom;
  }
 
  .cactus{
@@ -28,7 +30,7 @@
  	height: 60px;
  	bottom: 0;
  	background-image: url(img/pterodactyl.png);
- 	background-color: green;
+ 	background-repeat: no-repeat;
  	margin-bottom: 20px;
  }
 

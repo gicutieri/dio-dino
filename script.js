@@ -57,7 +57,9 @@
  	position = 0;
 
  	dino.style.backgroundImage = "url(img/dino2.png)";
- 	dino.style.backgroundColor = "green";
+ 	dino.style.width = '80px';
+
+ 	//dino.style.backgroundColor = "green";
 
  	let crouchInterval = setInterval(() => {
 
@@ -70,7 +72,8 @@
  					clearInterval(standInterval);
  					isCrouching = false;
  					dino.style.backgroundImage = "url(img/dino.png)";
- 					dino.style.backgroundColor = "transparent";
+ 					dino.style.width = '60px';
+ 					//dino.style.backgroundColor = "transparent";
  				} else {
  					position += 15;
  				}
