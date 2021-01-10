@@ -1,0 +1,11 @@
+/*
+ *	Author: Giovanna Gonçalves Cutieri
+ */
+
+ .dino{
+ 	width: 60px;
+ 	height: 60px;
+ 	background: url('dino.png');
+ 	position: absolute;
+ 	bottom: 0;
+ }
