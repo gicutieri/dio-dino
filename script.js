@@ -52,12 +52,14 @@
 
  function crouch() {
  	isCrouching = true;
+ 	position = 0;
 
- 	dino.style.backgroundImage = "url(dino2.png)";
+ 	dino.style.backgroundImage = "url(img/dino2.png)";
+ 	dino.style.backgroundColor = "green";
 
  	let crouchInterval = setInterval(() => {
 
- 		if (position <= 150) {
+ 		if (position <= -150) {
  			//stop
  			clearInterval(crouchInterval);
  			//stand up
@@ -65,7 +67,8 @@
  				if (position >= 0) {
  					clearInterval(standInterval);
  					isCrouching = false;
- 					dino.style.backgroundImage = 'url(dino.png)';
+ 					dino.style.backgroundImage = "url(img/dino.png)";
+ 					dino.style.backgroundColor = "transparent";
  				} else {
  					position += 15;
  				}
@@ -76,13 +79,13 @@
 	 		position -= 15;
  		}
 
- 	}, 400);
+ 	}, 20);
  }
 
  function createCactus() {
  	const cactus = document.createElement('div');
  	let cactusPosition = 1000;
- 	let randomTime = Math.random() * 6000;
+ 	let randomTime = Math.random() * 10000;
 
  	if(isGameOver) return;
 
@@ -93,7 +96,7 @@
  	//go left
  	let leftInterval = setInterval(() => {
  		
- 		if (createCactus < -60) {
+ 		if (cactusPosition < -60) {
  			clearInterval(leftInterval);
  			background.removeChild(cactus);
  		} else if (cactusPosition > 0 && cactusPosition < 60 && position < 60) { //if it's on the same position as the dinossaur
@@ -111,5 +114,38 @@
  	setTimeout(createCactus, randomTime);
  }
 
+ function createPterodactyl() {
+ 	const pterodactyl = document.createElement('div');
+ 	let pterodactylPosition = 1000;
+ 	let randomTime2 = Math.random() * 10000;
+
+ 	if(isGameOver) return;
+
+ 	pterodactyl.classList.add('pterodactyl');
+ 	background.appendChild(pterodactyl);
+ 	pterodactyl.style.left = pterodactylPosition + 'px';
+
+ 	//go left
+ 	let leftInterval2 = setInterval(() => {
+ 		
+ 		if (pterodactylPosition < -60) {
+ 			clearInterval(leftInterval2);
+ 			background.removeChild(pterodactyl);
+ 		} else if (pterodactylPosition > 0 && pterodactylPosition < 60 && !isCrouching) { //if the dinossaur is standing
+ 			clearInterval(leftInterval2);
+ 			isGameOver = true;
+ 			document.body.innerHTML = "<h1 class=\"game-over\">GAME OVER</h1>";
+ 		} else {
+ 			pterodactylPosition -= 10;
+ 			pterodactyl.style.left = pterodactylPosition + 'px';
+ 		}
+
+ 	}, 20);
+
+ 	//creates new pterodactyl
+ 	setTimeout(createPterodactyl, randomTime2);
+ }
+
  createCactus();
+ setTimeout(createPterodactyl, 2000);
  document.addEventListener('keyup', handleKeyUp);

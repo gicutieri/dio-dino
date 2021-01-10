@@ -9,7 +9,7 @@
  .dino{
  	width: 60px;
  	height: 60px;
- 	background-image: url(dino.png);
+ 	background-image: url(img/dino.png);
  	position: absolute;
  	bottom: 0;
  }
@@ -19,7 +19,17 @@
  	width: 60px;
  	height: 60px;
  	bottom: 0;
- 	background-image: url(cactus.png);
+ 	background-image: url(img/cactus.png);
+ }
+
+ .pterodactyl{
+ 	position: absolute;
+ 	width: 60px;
+ 	height: 60px;
+ 	bottom: 0;
+ 	background-image: url(img/pterodactyl.png);
+ 	background-color: green;
+ 	margin-bottom: 20px;
  }
 
  .game-over{
@@ -41,7 +51,7 @@
  .background{
  	position: absolute;
  	bottom: 0;
- 	background-image: url(background.png);
+ 	background-image: url(img/background.png);
  	background-repeat: repeat-x;
  	animation: slideright 600s infinite linear;
  	width: 100%;
