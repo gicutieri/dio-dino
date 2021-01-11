@@ -34,6 +34,15 @@
  	margin-bottom: 20px;
  }
 
+  .powerup{
+ 	position: absolute;
+ 	width: 25px;
+ 	height: 25px;
+ 	bottom: 0;
+ 	background-color: black;
+ 	margin-bottom: 70px;
+ }
+
  .game-over, .score{
  	text-align: center;
  	color: #66666f;

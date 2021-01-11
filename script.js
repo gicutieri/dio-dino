@@ -11,6 +11,7 @@
  let isGameOver = false;
  let position = 0;
  let score = 0;
+ powerOn = false;
 
  function handleKeyUp(event) {
  	if (event.keyCode === 32 || event.keyCode === 38) {
@@ -107,7 +108,7 @@
  			score += 1;
  			scoreTag.innerHTML = "SCORE: " + score;
  			//console.log(score);
- 		} else if (cactusPosition > 0 && cactusPosition < 60 && position < 60) { //if it's on the same position as the dinosaur
+ 		} else if (cactusPosition > 0 && cactusPosition < 60 && position < 60 && powerOn == false) { //if it's on the same position as the dinosaur
  			clearInterval(leftInterval);
  			isGameOver = true;
  			document.body.innerHTML = "<h1 class=\"game-over\">GAME OVER</h1>";
@@ -142,7 +143,7 @@
  			score += 1;
  			scoreTag.innerHTML = "SCORE: " + score;
  			//console.log(score);
- 		} else if (pterodactylPosition > 0 && pterodactylPosition < 60 && !isCrouching) { //if the dinosaur is standing
+ 		} else if (pterodactylPosition > 0 && pterodactylPosition < 60 && !isCrouching && powerOn == false) { //if the dinosaur is standing
  			clearInterval(leftInterval2);
  			isGameOver = true;
  			document.body.innerHTML = "<h1 class=\"game-over\">GAME OVER</h1>";
@@ -157,6 +158,49 @@
  	setTimeout(createPterodactyl, randomTime2);
  }
 
+  function createPowerUp() {
+ 	const powerup = document.createElement('div');
+ 	let powerupPosition = 1000;
+ 	let randomTime3 = Math.random() * 60000;
+
+ 	if(isGameOver) return;
+
+ 	powerup.classList.add('powerup');
+ 	background.appendChild(powerup);
+ 	powerup.style.left = powerupPosition + 'px';
+
+ 	//go left
+ 	let leftInterval3 = setInterval(() => {
+ 		
+ 		if (powerupPosition < -60) {
+ 			clearInterval(leftInterval3);
+ 			background.removeChild(powerup);
+ 		} else if (powerupPosition > 0 && powerupPosition < 60 && position > 30) { //if the dinosaur is jumping
+ 			clearInterval(leftInterval3);
+ 			background.removeChild(powerup);
+ 			powerOn = true;
+ 			dino.style.backgroundImage = "url(img/dino3.png)";
+ 			dino.style.width = '74px';
+ 		} else {
+ 			powerupPosition -= 10;
+ 			powerup.style.left = powerupPosition + 'px';
+ 		}
+
+ 	}, 20);
+
+
+ 	//how long the powerup lasts
+ 	setTimeout(function(){
+ 		powerOn = false;
+ 		dino.style.backgroundImage = "url(img/dino.png)";
+ 		dino.style.width = '60px';
+ 	}, 8000);
+
+ 	//creates new powerup
+ 	setTimeout(createPowerUp, randomTime3);
+ }
+
  createCactus();
  setTimeout(createPterodactyl, 2000);
+ setTimeout(createPowerUp, 5000);
  document.addEventListener('keyup', handleKeyUp);
